@@ -1,0 +1,510 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thanh Phát & Xuân Đào - Wedding Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Playfair Display', serif;
+      background: #ffffff;
+      width: 100%;
+      height: 100%;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #7b6b4c;
+      padding: 20px;
+      min-height: 100vh;
+      justify-content: center; /* center vertically */
+    }
+    .hidden { display: none; }
+    
+    .invite-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2em;
+      margin-bottom: 10px;
+    }
+
+    .names, .date {
+      font-size: clamp(20px, 5vw, 28px);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .date {
+       font-family: 'Great Vibes', cursive;
+    }
+
+    .click-image {
+      max-width: 180px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      animation: pulse 2s infinite;
+      margin-top: 10px;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .click-image:hover {
+      transform: scale(1.2);
+    }
+
+    .wedding-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .wedding-photo {
+      max-width: 300px;
+      border-radius: 10px;
+      margin: 10px 0;
+      width: 100%;
+    }
+
+    .family-info {
+      font-size: 0.85em;
+    }
+
+.family-columns {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 40px;
+  margin-top: 10px;
+}
+
+.family-side {
+  min-width: 160px;
+  text-align: center;
+  min-height: 100%
+}
+
+.divider {
+  width: 1px;
+  background-color: #7b6b4c;
+  min-height: 100%;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 600px) {
+  .family-columns {
+    gap: 10px;
+  }
+
+   .family-info {
+    font-size: 0.5em; /* giảm kích thước chữ ở mobile */
+  }
+
+  .family-side {
+    min-width: 100px;
+    font-size: 0.5em;
+  }
+}
+
+    .invite-text {
+      font-style: italic;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
+
+    .screen2-names {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      gap: 10px 20px;
+      font-size: 1.5em;
+      margin: 20px 0;
+    }
+
+    .wedding-calendar {
+      max-width: 300px;
+      margin: 20px auto;
+    }
+
+    .wedding-calendar .year{
+      font-size: 3em;
+      font-weight: bold;
+    }
+
+    .wedding-calendar .month-script {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      font-size: 0.9em;
+    }
+
+    .calendar-grid div {
+      padding: 5px 0;
+    }
+
+    .calendar-grid .highlight {
+      background: #530c0c;
+      color: #fff;
+      border-radius: 50%;
+    }
+
+    #countdown {
+      font-size: 1.8em;
+      font-weight: bold;
+      letter-spacing: 4px;
+      margin: 10px 0;
+      color: #7b6b4c;
+    }
+
+    .location-section {
+      color: #7b6b4c;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 300px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .directions-link a {
+      color: #7b6b4c;
+      font-weight: bold;
+      text-decoration: underline;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .directions-link a:hover {
+      color: #a52a2a;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* Animations */
+    .animate {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+    .animate.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+.album-section {
+  max-width: 800px; /* or match your header image width */
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.album-slider {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;      /* Let it fit small screens */
+  margin: 0 auto;
+}
+
+.album-track {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.album-track img {
+  flex: 0 0 100%;       /* Show 1 image at a time */
+  width: 100%;          /* Full width of container */
+  height: auto;
+  border-radius: 8px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(123, 107, 76, 0.5);
+  border: none;
+  color: #fff;
+  font-size: 2em;
+  cursor: pointer;
+  padding: 5px 10px;
+  z-index: 10;
+}
+
+.arrow.left {
+  left: 5px;
+}
+
+.arrow.right {
+  right: 5px;
+}
+
+@media (max-width: 600px) {
+  .arrow {
+    font-size: 1.5em;
+    padding: 3px 6px;
+  }
+}
+
+.screen2-names {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px; /* Adjust this smaller to reduce spacing */
+  font-size: 1.8em;
+  color: #7b6b4c;
+}
+
+.name-left, .name-right {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.ampersand {
+  font-size: 1.5em;
+}
+
+.become-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2em;  /* bạn chỉnh to/nhỏ tùy ý */
+  margin-bottom: 5px;
+  color: #7b6b4c;
+  white-space: nowrap;
+}
+
+.bank-section {
+  margin-top: 30px;
+  padding: 10px 20px;
+  text-align: center;
+  color: #7b6b4c;
+  flex-wrap: nowrap;
+}
+
+.bank-title {
+  font-size: 1em;
+  margin-bottom: 10px;
+  flex-wrap: nowrap;
+}
+
+.bank-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+
+.bank-details {
+  text-align: left;
+  font-size: 1em;
+}
+
+.bank-qr img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.thank-note {
+  margin-top: 15px;
+  font-size: 1.1em;
+  font-style: italic;
+  color: #7b6b4c;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="screen1">
+      <div class="invite-title">Thư mời tham dự tiệc cưới</div>
+      <div class="names">THANH PHÁT & XUÂN ĐÀO</div>
+      <div class="date">19.07.2025</div>
+      <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/218e3c9ab59b0d1e45e206f975bffd03.png" alt="Open Invitation" class="click-image" id="envelopeImg">
+    </div>
+
+    <div id="screen2" class="hidden">
+      <div class="wedding-title animate">We're getting married</div>
+      <div class="album-section animate">
+          <div class="album-slider">
+            <button class="arrow left" onclick="scrollAlbum(-1)">&#10094;</button>
+              <div class="album-track" id="albumTrack">
+                <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/30x30%20xuan%20dao_01.jpg" alt="Album photo 1">
+                <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/30x30%20xuan%20dao_02.jpg" alt="Album photo 2">
+                <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/30x30%20xuan%20dao_03.jpg" alt="Album photo 3">
+                <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/30x30%20xuan%20dao_04.jpg" alt="Album photo 4">
+                <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/30x30%20xuan%20dao_05.jpg" alt="Album photo 5">
+                <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/30x30%20xuan%20dao_06.jpg" alt="Album photo 6">
+                <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/30x30%20xuan%20dao_07.jpg" alt="Album photo 7">
+                <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/30x30%20xuan%20dao_08.jpg" alt="Album photo 8">
+                <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/30x30%20xuan%20dao_09.jpg" alt="Album photo 9">
+                <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/30x30%20xuan%20dao_10.jpg" alt="Album photo 10">
+                <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/30x30%20xuan%20dao_11.jpg" alt="Album photo 11">
+                </div>
+              <button class="arrow right" onclick="scrollAlbum(1)">&#10095;</button>
+            </div>
+
+<div class="family-columns">
+  <div class="family-side">
+    <div class="title">NHÀ TRAI</div>
+    <div>Ông. Nguyễn Thanh Tiến</div>
+    <div>Bà. Nguyễn Thị Thúy Diễm</div>
+    <div>TP. Long Xuyên</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="family-side">
+    <div class="title">NHÀ GÁI</div>
+    <div>Ông. Đào Văn Lợi</div>
+    <div>Bà. Lâm Thị Thanh Nguyệt</div>
+    <div>TX. Tân Châu</div>
+  </div>
+</div>
+
+<div class="screen2-names">
+  <div class="name-left">
+    <div>NGUYỄN</div>
+    <div>THANH</div>
+    <div>PHÁT</div>
+  </div>
+  <div class="ampersand">&</div>
+  <div class="name-right">
+    <div>ĐÀO</div>
+    <div>XUÂN</div>
+    <div>ĐÀO</div>
+  </div>
+</div>
+
+
+      <div class="wedding-calendar animate">
+        <div class="become-text">We will become husband and wife in:</div>
+        <div class="year">2025</div>
+        <div class="month-script">July</div>
+        <div class="countdown" id="countdown">Loading countdown...</div>
+        <div class="invite-text">At <strong>10:00</strong> on <strong>Saturday, July 19<sup>th</sup>, 2025</strong></div>
+        <div class="calendar-grid">
+          <div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div><div>SUN</div>
+          <div></div><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+          <div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div>
+          <div>14</div><div>15</div><div>16</div><div>17</div><div>18</div><div class="highlight">19</div><div>20</div>
+          <div>21</div><div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div>
+          <div>28</div><div>29</div><div>30</div><div>31</div><div></div><div></div><div></div>
+        </div>
+      </div>
+
+      <div class="location-section animate">
+        <div class="location-address">Tại Tư gia<br> Tổ 5, Ấp 3, X.Vĩnh Xương, TX. Tân Châu </div>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1958.970512947973!2d105.17945084412003!3d10.892086610669654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310a2dbc111eeabf%3A0x8b30f5f954ea184b!2zQuG6v24gxJHDsiBWxKluaCBYxrDGoW5n!5e0!3m2!1svi!2s!4v1751887288326!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="directions-link">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Bến+đò+Vĩnh+Xương" target="_blank">
+            Chỉ đường đến tư gia
+          </a>
+        </div>
+      </div>
+
+      <div class="bank-section animate">
+  <div class="bank-title">Thông tin chuyển khoản mừng cưới:</div>
+  <div class="bank-info">
+    <div class="bank-details">
+      <div><strong>Ngân hàng:</strong> BIDV</div>
+      <div><strong>Chủ tài khoản:</strong> Nguyễn Thanh Phát</div>
+      <div><strong>Số tài khoản:</strong> 7011001315</div>
+      <div><strong>Chi nhánh:</strong> Long Xuyên</div>
+    </div>
+    <div class="bank-qr">
+      <img src="https://raw.githubusercontent.com/tphat412/wedding-invitation/main/QR.png" alt="QR chuyển khoản" />
+    </div>
+  </div>
+</div>
+
+<div class="thank-note animate">
+  Chúng tôi rất mong nhận được sự hiện diện của bạn trong ngày vui trọng đại này!
+</div>
+
+  </div>
+
+  <script>
+    const weddingDate = new Date("2025-07-19T10:00:00").getTime();
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+      if (distance <= 0) {
+        document.getElementById("countdown").innerText = "00 : 00 : 00 : 00";
+        clearInterval(countdownInterval);
+        return;
+      }
+      const days = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+      const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+      const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+      const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+      document.getElementById("countdown").innerText = `${days} : ${hours} : ${minutes} : ${seconds}`;
+    }
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    document.getElementById("envelopeImg").addEventListener("click", () => {
+      document.getElementById("screen1").classList.add("hidden");
+      document.getElementById("screen2").classList.remove("hidden");
+    });
+
+let currentIndex = 0;
+
+function scrollAlbum(direction) {
+  const track = document.getElementById("albumTrack");
+  const images = track.querySelectorAll("img");
+  const totalImages = images.length;
+
+  currentIndex += direction;
+
+  if (currentIndex < 0) currentIndex = 0;
+  if (currentIndex >= totalImages - 1) currentIndex = totalImages - 1;
+
+  const sliderWidth = track.parentElement.clientWidth;
+  track.style.transform = `translateX(-${currentIndex * sliderWidth}px)`;
+
+  updateArrows();
+}
+
+function updateArrows() {
+  const arrowLeft = document.getElementById("arrowLeft");
+  const arrowRight = document.getElementById("arrowRight");
+
+  arrowLeft.style.display = currentIndex === 0 ? "none" : "block";
+  arrowRight.style.display = currentIndex === document.getElementById("albumTrack").querySelectorAll("img").length - 1 ? "none" : "block";
+}
+
+// Initialize on load
+window.onload = updateArrows;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
